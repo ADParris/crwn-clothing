@@ -1,9 +1,6 @@
 import "./button.styles.scss";
 
-interface ButtonType {
-  google: "google-sign-in";
-  inverted: "inverted";
-}
+type ButtonType = "google-sign-in" | "inverted";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: ButtonType;
