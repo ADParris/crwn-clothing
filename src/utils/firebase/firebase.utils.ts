@@ -1,13 +1,17 @@
 import { FirebaseError, initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
+  NextFn,
+  NextOrObserver,
   User,
   UserCredential,
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
+  signOut,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { UserCredentials } from "../../types/User";
@@ -77,7 +81,12 @@ export const signInAuthUserWithEmailAndPassword = async ({
   password,
 }: UserCredentials): Promise<UserCredential | null> => {
   if (!email || !password) return null;
-  console.log(email, password);
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutAuthUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener: NextFn<NextFn<User | null>> = (
+  callback
+) => onAuthStateChanged(auth, callback);

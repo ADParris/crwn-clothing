@@ -32,7 +32,10 @@ const SignInForm = () => {
         email,
         password,
       });
-      console.log(response);
+
+      if (!response) return;
+      const { user } = response;
+
       resetFormFields();
     } catch (error) {
       const err = error as FirebaseError;
@@ -49,8 +52,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const resetFormFields = () => {
