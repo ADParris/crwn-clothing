@@ -1,25 +1,20 @@
-import "./form-input.styles.scss";
+import { FormInputLabel, GroupContainer, Input } from "./form-input.styles";
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
 const FormInput = ({ label, ...otherProps }: FormInputProps) => {
-  const isTyping =
-    typeof otherProps.value === "string" && otherProps.value.length;
+  const isActive =
+    typeof otherProps.value === "string" && otherProps.value?.length > 0;
 
   return (
-    <div className="group">
-      <input className="form-input" {...otherProps} />
+    <GroupContainer>
+      <Input {...otherProps} />
       {label && (
-        <label
-          className={`${isTyping ? "shrink" : ""} form-input-label`}
-          htmlFor=""
-        >
-          {label}
-        </label>
+        <FormInputLabel shrink={isActive.toString()}>{label}</FormInputLabel>
       )}
-    </div>
+    </GroupContainer>
   );
 };
 

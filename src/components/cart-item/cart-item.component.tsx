@@ -1,4 +1,9 @@
-import "./cart-item.styles.scss";
+import {
+  CartItemContainer,
+  CartItemImage,
+  ItemDetailsContainer,
+  NameContainer,
+} from "./cart-item.styles";
 
 interface CartItemProps {
   cartItem: {
@@ -14,15 +19,15 @@ const CartItem = ({
   cartItem: { imageUrl, name, price, quantity },
 }: CartItemProps) => {
   return (
-    <div className="cart-item-container">
-      <img alt={name} src={imageUrl} />
-      <div className="item-details">
-        <span className="name">{name}</span>
-        <span className="price">
+    <CartItemContainer>
+      <CartItemImage alt={name} src={imageUrl} />
+      <ItemDetailsContainer>
+        <NameContainer>{name}</NameContainer>
+        <span>
           {quantity} x ${price}
         </span>
-      </div>
-    </div>
+      </ItemDetailsContainer>
+    </CartItemContainer>
   );
 };
 

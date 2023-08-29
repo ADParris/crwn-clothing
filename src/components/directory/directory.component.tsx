@@ -1,18 +1,46 @@
-import { Category } from "../../types/Category";
-import CategoryItem from "../category-item/category-item.component";
-import "./directory.styles.scss";
+import DirectoryItem from "../directory-item/directory-item.component";
+import { DirectoryContainer } from "./directory.styles";
 
-interface DirectoryProps {
-  categories: Category[];
-}
+const categories = [
+  {
+    id: 1,
+    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
+    route: "shop/hats",
+    title: "hats",
+  },
+  {
+    id: 2,
+    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+    route: "shop/jackets",
+    title: "jackets",
+  },
+  {
+    id: 3,
+    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+    route: "shop/sneakers",
+    title: "sneakers",
+  },
+  {
+    id: 4,
+    imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+    route: "shop/womens",
+    title: "womens",
+  },
+  {
+    id: 5,
+    imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
+    route: "shop/mens",
+    title: "mens",
+  },
+];
 
-const Directory = ({ categories }: DirectoryProps) => {
+const Directory = () => {
   return (
-    <div className="directory-container">
+    <DirectoryContainer>
       {categories.map((category) => (
-        <CategoryItem category={category} key={category.id} />
+        <DirectoryItem category={category} key={category.id} />
       ))}
-    </div>
+    </DirectoryContainer>
   );
 };
 

@@ -1,13 +1,16 @@
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import {
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
-import "./sign-in-form.styles.scss";
+import {
+  SignInFormButtonsContainer,
+  SignInFormContainer,
+  SignInFormTitle,
+} from "./sign-in-form.styles";
 
 const initialFormFieldsState = {
   email: "",
@@ -60,8 +63,8 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
-      <h2>Already have an account?</h2>
+    <SignInFormContainer>
+      <SignInFormTitle>Already have an account?</SignInFormTitle>
       <span>Sign in with email and password...</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -82,7 +85,7 @@ const SignInForm = () => {
           value={password}
         />
 
-        <div className="buttons-container">
+        <SignInFormButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button
             buttonType="google-sign-in"
@@ -91,9 +94,9 @@ const SignInForm = () => {
           >
             Google sign in
           </Button>
-        </div>
+        </SignInFormButtonsContainer>
       </form>
-    </div>
+    </SignInFormContainer>
   );
 };
 

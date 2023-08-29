@@ -1,12 +1,16 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../contexts/cart.context";
-import Button from "../button/button.component";
+import { selectCartItems } from "../../store/cart/cart.selectors";
 import CartItem from "../cart-item/cart-item.component";
-import "./cart-dropdown.styles.scss";
+import {
+  CartDropdownButton,
+  CartDropdownContainer,
+  CartItemsContainer,
+  EmptyMessageContainer,
+} from "./cart-dropdown.styles";
 
 const CartDropdown = () => {
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,14 +18,20 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className="cart-dropdown-container">
-      <div className="cart-items">
-        {cartItems.map((cartItem) => (
-          <CartItem cartItem={cartItem} key={cartItem.id} />
-        ))}
-      </div>
-      <Button onClick={handleClick}>GO TO CHECKOUT</Button>
-    </div>
+    <CartDropdownContainer>
+      <CartItemsContainer>
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
+            <CartItem cartItem={cartItem} key={cartItem.id} />
+          ))
+        ) : (
+          <EmptyMessageContainer>Your cart is empty</EmptyMessageContainer>
+        )}
+      </CartItemsContainer>
+      <CartDropdownButton buttonType="inverted" onClick={handleClick}>
+        GO TO CHECKOUT
+      </CartDropdownButton>
+    </CartDropdownContainer>
   );
 };
 
