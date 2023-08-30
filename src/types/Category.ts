@@ -16,16 +16,37 @@ export type Categories =
 
 export interface CategoriesState {
   categories: Categories;
+  error: string | null;
+  isLoading: boolean;
 }
 
 export enum CategoriesActionTypes {
-  SET_CATEGORIES = "SET_CATEGORIES",
+  FETCH_CATEGORIES_FAILED = "categories/FETCH_CATEGORIES_FAILED",
+  FETCH_CATEGORIES_START = "categories/FETCH_CATEGORIES_START",
+  FETCH_CATEGORIES_SUCCESS = "categories/FETCH_CATEGORIES_SUCCESS",
 }
 
-export type CategoriesActions = {
-  type: CategoriesActionTypes.SET_CATEGORIES;
+type FetchCategoriesFailedAction = {
+  type: CategoriesActionTypes.FETCH_CATEGORIES_FAILED;
+  payload: CategoriesState["error"];
+};
+type FetchCategoriesStartAction = {
+  type: CategoriesActionTypes.FETCH_CATEGORIES_START;
+};
+type FetchCategoriesSuccessAction = {
+  type: CategoriesActionTypes.FETCH_CATEGORIES_SUCCESS;
   payload: CategoriesState["categories"];
 };
+
+export type CategoriesActionsWithPayload =
+  | FetchCategoriesFailedAction
+  | FetchCategoriesSuccessAction;
+
+export type CategoriesActionsWithoutPayload = FetchCategoriesStartAction;
+
+export type CategoriesActions =
+  | CategoriesActionsWithPayload
+  | CategoriesActionsWithoutPayload;
 
 export type CategoriesMap = {
   [categoryTitle: string]: Product[];

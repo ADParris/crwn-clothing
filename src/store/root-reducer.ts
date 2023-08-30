@@ -8,3 +8,5 @@ export const rootReducer = combineReducers({
   categories: categoriesReducer,
   user: userReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
